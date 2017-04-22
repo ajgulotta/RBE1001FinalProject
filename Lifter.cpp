@@ -1,8 +1,16 @@
 #include "Lifter.h"
+#include "Arduino.h"
 
-void Lifter::initialize(int pinL, int pinR){
+Lifter::Lifter(){}
+
+void Lifter::initialize(int pinL, int pinR, int liftPotPin){
 	liftMotorL.attach(pinL, 1000, 2000);
 	liftMotorR.attach(pinR, 1000, 2000);
+	potPin = liftPotPin;
+}
+
+void moveTo(int position){
+
 }
 
 void Lifter::liftUp(int speed){
