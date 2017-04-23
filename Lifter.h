@@ -4,7 +4,8 @@ class Lifter{
 private:
 		Servo liftMotorL;
 		Servo liftMotorR;
-		int potPin
+		int potPin;
+		int potPos;
 
 public:
 		void initialize(int pinL, int pinR, int liftPotPin);
