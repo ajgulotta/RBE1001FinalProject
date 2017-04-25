@@ -1,14 +1,18 @@
 #include "Lifter.h"
 #include "Arduino.h"
 
-Lifter::Lifter(){}
+void Lifter::Lifter(int pin, int liftPotPin){
+	liftMotor.attach(pin, 1000, 2000);			//Initializes motors
+	potPin = liftPotPin;							//Assigns potentiometr pin
+	potPos = analogRead(potPin);					//Updates initial pot position
+}
 
-void Lifter::initialize(int pinL, int pinR, int liftPotPin){
+/*void Lifter::initialize(int pinL, int pinR, int liftPotPin){
 	liftMotorL.attach(pinL, 1000, 2000);			//Initializes motors
 	liftMotorR.attach(pinR, 1000, 2000);
 	potPin = liftPotPin;							//Assigns potentiometr pin
 	potPos = analogRead(potPin);					//Updates initial pot position
-}
+}*/
 
 void Lifter::moveTo(int position){							//Moves lifter to given pot position
 	potPos = analogRead(potPin);

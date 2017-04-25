@@ -1,9 +1,14 @@
 #include "Robot.h"
 
-void Robot::initialize(int pinL, int pinR){
+void Robot::Robot(int pinL, int pinR){
 	motorL.attach(pinL, 1000, 2000);			//Initializes drivetrain motors
 	motorR.attach(pinR, 1000, 2000);
 }
+
+/*void Robot::initialize(int pinL, int pinR){
+	motorL.attach(pinL, 1000, 2000);			//Initializes drivetrain motors
+	motorR.attach(pinR, 1000, 2000);
+}*/
 
 void Robot::driveLR(int speedL, int speedR){	//Manual control for running each
 	motorL.write(90 + speedL);					//side of the drivetrain at a
