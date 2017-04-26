@@ -6,9 +6,8 @@ private:
 		Servo motorR;
 
 public:
-		void Robot(int pinL, int pin R);
-		//void initialize(int pinL, int pinR);
+		void initialize(int pinL, int pinR);
 		void driveLR(int speedL, int speedR);
 		void drive(int speed);
-		void stop();
-}
+		void halt();
+};

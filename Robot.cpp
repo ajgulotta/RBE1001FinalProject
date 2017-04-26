@@ -1,14 +1,10 @@
 #include "Robot.h"
 
-void Robot::Robot(int pinL, int pinR){
+
+void Robot::initialize(int pinL, int pinR){
 	motorL.attach(pinL, 1000, 2000);			//Initializes drivetrain motors
 	motorR.attach(pinR, 1000, 2000);
 }
-
-/*void Robot::initialize(int pinL, int pinR){
-	motorL.attach(pinL, 1000, 2000);			//Initializes drivetrain motors
-	motorR.attach(pinR, 1000, 2000);
-}*/
 
 void Robot::driveLR(int speedL, int speedR){	//Manual control for running each
 	motorL.write(90 + speedL);					//side of the drivetrain at a
@@ -20,7 +16,7 @@ void Robot::drive(int speed){					//Takes in a speed from -90 to 90
 	motorR.write(90 - speed);					//speed in the same direction
 }
 
-void Robot::stop(){								//Stops the drivetrain
+void Robot::halt(){								//Stops the drivetrain
 	motorL.write(90);
 	motorR.write(90);
 }
