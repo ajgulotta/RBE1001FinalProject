@@ -7,7 +7,7 @@ Robot robot;
 Lifter arm;
 Intake intake;
 
-boolean flag = true;
+boolean flagT = true;
 
 void teleop( long time,DFW & dfw) { // function definition
 	Serial.print("\r\nTeleop time remaining: ");
@@ -21,14 +21,24 @@ void teleop( long time,DFW & dfw) { // function definition
     robot.initialize(4, 5);
     arm.initialize(6, 7, 0);
     intake.initialize(8);
-    flag = false;
+    flagT = false;
   }
 
-  
-  dfw.run();
 
-  robot.driveLR(dfw.joysticklv(), 180 - dfw.joystickrv());
+  if(dfw.getCompetitionState() != powerup){
+    robot.getRightMotor().write(180-dfw.joystickrv());     //DFW.joystick will return 0-180 as an int into rightmotor.write
+    robot.getLeftMotor().write(dfw.joysticklv());      //DFW.joystick will return 0-180 as an int into leftmotor.write
+  }
 
+  /*robot.driveLR(dfw.joysticklv(), 180 - dfw.joystickrv());
+  if (dfw.getCompetitionState() != powerup) {
+    if(dfw.joysticklv() > 95 || dfw.joysticklv() < 85){
+      robot.driveL(dfw.joysticklv());
+    }
+    if(dfw.joystickrv() > 95 || dfw.joystickrv() < 85){
+      robot.driveR(180 - dfw.joystickrv());
+    }
+  }*/
   if(dfw.l2()){
     intake.collect();
   }
@@ -37,6 +47,9 @@ void teleop( long time,DFW & dfw) { // function definition
   }
   if(dfw.two()){
     intake.halt();
+  }
+  if(dfw.one()){
+    robot.halt();
   }
 
   arm.halt();
