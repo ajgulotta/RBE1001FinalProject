@@ -9,8 +9,9 @@ const int trackerM = 2;
 int cvalue = 700;
 boolean flag = true;
 boolean firstLine = true;
+boolean autoRun = true;
 
-Robot robotA;
+Robot robotB;
 Lifter armA;
 Intake intakeA;
 
@@ -24,152 +25,123 @@ void autonomous( long time,DFW & dfw) { // function definition
 
   
   if(flag){
-	  robotA.initialize(4, 5);
+	  robotB.initialize(4, 5);
     armA.initialize(6, 7, 11);
     intakeA.initialize(8);
+    pinMode(22, INPUT_PULLUP);
+    pinMode(23, INPUT_PULLUP);
+    pinMode(24, INPUT_PULLUP);
     //flag = false;
   }
 
-/*
-  if(digitalRead(22) == LOW){
-      if(analogRead(trackerL) > cvalue && analogRead(trackerR) > cvalue){
-        robotA.drive(30);
-      }
-      else if(analogRead(trackerL) < cvalue && analogRead(trackerR) > cvalue && analogRead(trackerM) < cvalue){
-        robotA.turnLeft();
-        delay(2000);
-      }
-      else if(analogRead(trackerL) > cvalue && analogRead(trackerR) < cvalue && analogRead(trackerM) < cvalue){
-        robotA.turnRight();
-        delay(2000);
-      }
-      else if(analogRead(trackerL) < cvalue && analogRead(trackerR) > cvalue){
-        robotA.driveLR(100, 20);
-      }
-      else if(analogRead(trackerL) > cvalue && analogRead(trackerR) < cvalue){
-        robotA.driveLR(110, 90);
-      }
-      else if(analogRead(trackerL) > cvalue && analogRead(trackerR) > cvalue && analogRead(trackerM) > cvalue){
-        robotA.drive(90);
-        delay(3000);
-        robotA.halt();
-        exit(0);
-      }
 
-      if(time > 15000){
-        robotA.drive(50);
-      }
-      if(time < 15000 && time > 10000){
-        robotA.driveLR(140, 140);
-      }
-      if(time < 10000){
-        robotA.drive(90);
-      }
+  if(digitalRead(22) == LOW && autoRun){
+    while(analogRead(trackerL) > (cvalue - 300) && analogRead(trackerR) > (cvalue - 300)){
+      robotB.drive(90);
+    }
+    robotB.halt();
+    armA.moveTo(800);
+    robotB.drive(90);
+    delay(4000);
+    robotB.halt();
+    autoRun = false;
   }
-  else if(digitalRead(23) == LOW){*/
-  
-//      if(time > 15000){
-//        robotA.getRightMotor().write(0);
-//        robotA.getLeftMotor().write(180);
-//      }
-//      else {
-//        robotA.getRightMotor().write(90);
-//        robotA.getLeftMotor().write(90);
-//      }
-//      else if(time < 15000 && time > 10000){
-//        robotA.getRightMotor().write(0);
-//        robotA.getLeftMotor().write(0);
-//      }
-//      else if(time < 10000){
-//        robotA.getRightMotor().write(90);
-//        robotA.getLeftMotor().write(90);
-//      }
-      
+  else if(digitalRead(23) == LOW && autoRun){    
     
-    
-    
-    
-    /*if(flag){
+    if(flag){
       digitalWrite(29, HIGH);
-      robotA.drive(90);
-      delay(4000);
-      armA.moveTo(460);
-      robotA.driveLR(150, 150);
-      delay(1400);
+      robotB.drive(90);
+      delay(2000);
+      robotB.driveLR(150, 150);
+      delay(900);
       //while
-      if(analogRead(trackerL) > cvalue && analogRead(trackerR) > cvalue){
-        robotA.drive(90);
+      while(analogRead(trackerL) > cvalue && analogRead(trackerR) > cvalue){
+        robotB.drive(90);
       }
-      delay(300);
+      delay(200);
       //while
-      if(analogRead(trackerL) > cvalue && analogRead(trackerR) > cvalue){
-        robotA.drive(90);
+      while(analogRead(trackerL) > cvalue && analogRead(trackerR) > cvalue){
+        robotB.drive(90);
       }
-      robotA.halt();
+      robotB.halt();
       if(analogRead(trackerL) < cvalue && analogRead(trackerR) > cvalue){
         //while
-        if(analogRead(trackerL) < cvalue && analogRead(trackerR) > cvalue){
-          robotA.driveLR(90, 30);
+        while(analogRead(trackerL) < cvalue && analogRead(trackerR) > cvalue){
+          robotB.driveLR(90, 30);
         }
         
-        robotA.halt();
+        robotB.halt();
       }
       if(analogRead(trackerL) > cvalue && analogRead(trackerR) < cvalue){
         //while
-        if(analogRead(trackerL) > cvalue && analogRead(trackerR) < cvalue){
-          robotA.driveLR(150, 90);
+        while(analogRead(trackerL) > cvalue && analogRead(trackerR) < cvalue){
+          robotB.driveLR(150, 90);
         }
-        robotA.halt();
+        robotB.halt();
       }
-      robotA.drive(90);
-      delay(900);
+      robotB.drive(90);
+      delay(220);
       //while
-      if(analogRead(trackerM) > cvalue){
-        robotA.driveLR(40, 40);
+      while(analogRead(trackerM) > cvalue){
+        robotB.driveLR(40, 40);
       }
-      delay(300);
-      robotA.halt();
+      delay(250);
+      robotB.halt();
       digitalWrite(29, LOW);
       flag = false;
     }
     //while
-    if(analogRead(trackerR) < cvalue){
-      robotA.driveLR(140, 90);
+    while(analogRead(trackerR) < cvalue){
+      robotB.driveLR(140, 90);
     }
     if(analogRead(trackerL) > cvalue && analogRead(trackerR) > cvalue){
       digitalWrite(28, HIGH);
-      robotA.drive(90);
+      robotB.drive(90);
     }
-    else if(analogRead(trackerL) < cvalue && analogRead(trackerR) > cvalue){*/
+    else if(analogRead(trackerL) < cvalue && analogRead(trackerR) > cvalue){
       digitalWrite(28, LOW);
       digitalWrite(27, HIGH);
-      robotA.halt();
-      robotA.drive(-15);
-      //armA.moveTo(460);
-      //delay(1000);
-      robotA.halt();
-      robotA.driveLR(10, 80);
-      delay(800);
-      robotA.drive(80);
-      delay(1500);
-      robotA.halt();
+      robotB.halt();
+      robotB.drive(-15);
+      armA.moveTo(460);
+      delay(1000);
+      robotB.halt();
+      robotB.driveLR(10, 80);
+      delay(1000);
+      robotB.drive(80);
+      delay(1000);
+      robotB.halt();
       digitalWrite(27, LOW);
       digitalWrite(26, HIGH);
       intakeA.eject();
       delay(3000);
       intakeA.halt();
-      robotA.drive(-30);
-      delay(3000);
-      robotA.halt();
-      //armA.moveTo(900);
-      digitalWrite(26, LOW);
-      robotA.halt();
-   // }
-  
-//  else{
-//    robotA.halt();
-//  }
+//      robotB.drive(-30);
+//      delay(3000);
+//      robotB.halt();
+//      armA.moveTo(900);
+//      digitalWrite(26, LOW);
+      robotB.halt();
+      autoRun = false;
+    }
+  else{
+    robotB.halt();
+  }
   //delay(100);
   
 }
-
+  else if(digitalRead(24) == LOW){
+      if(time > 15000){
+        robotB.drive(50);
+      }
+      if(time < 15000 && time > 10000){
+        robotB.driveLR(140, 140);
+      }
+      if(time < 10000){
+        robotB.drive(90);
+      }
+      if(time < 1000){
+        robotB.halt();
+      }
+    }
+  }

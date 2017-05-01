@@ -14,24 +14,24 @@ void Lifter::moveTo(int position){							//Moves lifter to given pot position
 	if(potPos < position){							//Starting below target position
 		while(potPos < (position - 10)){			//Moves lifter
 			potPos = analogRead(potPin);
-			liftUp(90);
+			liftDown(90);
 		}
 		halt();
 		while(potPos > (position + 10)){			//Corrects in case of overshoot
 			potPos = analogRead(potPin);
-			liftDown(90);
+			liftUp(90);
 		}
 		halt();
 	}
 	else if(potPos > position){						//Starting above target position
 		while(potPos > (position + 10)){			//Moves lifter
 			potPos = analogRead(potPin);
-			liftDown(90);
+			liftUp(90);
 		}
 		halt();
 		while(potPos < (position - 10)){			//Corrects in case of overshoot
 			potPos = analogRead(potPin);
-			liftUp(90);
+			liftDown(90);
 		}
 		halt();
 	}

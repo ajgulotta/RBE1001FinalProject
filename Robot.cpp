@@ -36,7 +36,7 @@ void Robot::turnRight(){          //Turns 90 degrees right
   //delay(2000);
 }
 
-void Robot::halt(){								//Stops the drivetrain
+void Robot::halt(void){								//Stops the drivetrain
 	motorL.write(90);
 	motorR.write(90);
 }
@@ -49,4 +49,6 @@ Servo Robot::getLeftMotor(){
 Servo Robot::getRightMotor(){
   return motorR;
 }
+
+
 

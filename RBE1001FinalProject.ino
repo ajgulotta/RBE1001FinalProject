@@ -16,7 +16,7 @@
 #include "Lifter.h"
 #include "Intake.h"
 
-
+//Robot robotB;
 int ledpindebug = 13; //Wireless controller Debug pin. If lit then there is no communication.
 DFW dfw(ledpindebug, autonomous, teleop); // Instantiates the DFW object and setting the debug pin. 
                                           //The debug pin will be set high if no communication is 
@@ -25,7 +25,17 @@ DFW dfw(ledpindebug, autonomous, teleop); // Instantiates the DFW object and set
 void setup() {
 	Serial.begin(9600); // Serial output begin. Only needed for debug
 	dfw.begin(); // Serial1 output begin for DFW library. Buad and port #."Serial1 only"
+  //robotB.initialize(4, 5);
 }
 void loop() {
 	dfw.run();
 }
+
+void robotShutDown(void){
+  //robotB.halt();
+}
+
+Robot getRobot(){
+  //return robotB;
+}
+
