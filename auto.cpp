@@ -17,16 +17,11 @@ Intake intakeA;
 
 
 void autonomous( long time,DFW & dfw) { // function definition
-	Serial.print("\r\nAuto time remaining: ");
-	Serial.print(time);
-
-
-  Serial.println("auto test");
 
   
   if(flag){
 	  robotB.initialize(4, 5);
-    armA.initialize(6, 7, 11);
+    armA.initialize(10, 11, 11);
     intakeA.initialize(8);
     pinMode(22, INPUT_PULLUP);
     pinMode(23, INPUT_PULLUP);
